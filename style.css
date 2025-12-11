@@ -3,7 +3,7 @@ header {
   background: #fff; 
   padding: 10px 20px;
   border-bottom: 1px solid #ddd;
-  position: relative;   /* ← fixed を解除 */
+  position: sticky;   /* ← 固定しないでスクロールについてくる */
   top: 0;
   width: 100%;
   z-index: 10;
@@ -14,15 +14,13 @@ header {
   display: grid;
   grid-gap: 15px;
   padding: 20px;
-
-  /* ← 画面幅で自動的に複数列になる */
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
 }
 
 /* サムネイルサイズ拡大 ------------------------- */
 .video-grid .video-item img {
   width: 100%;
-  height: 160px;      /* ← 好きに大きさ調整できる */
+  height: 160px;
   object-fit: cover;
   border-radius: 10px;
 }
@@ -33,10 +31,21 @@ header {
   margin-top: 8px;
 }
 
-/* メニュー（左サイドなどの場合） */
-.menu {
+/* ---------- 右固定メニュー ---------- */
+#sidebar {
   width: 240px;
   padding: 20px;
   background: #f8f8f8;
-  position: relative;   /* ← fixed を解除 */
+  position: fixed;     /* ← 完全固定 */
+  right: 0;            /* ← 右側に固定 */
+  top: 60px;           /* ← ヘッダーの高さ分下げる */
+  height: calc(100% - 60px);
+  overflow-y: auto;    /* ← メニューが多くてもスクロール可能 */
+  border-left: 1px solid #ddd;
+  z-index: 9;
+}
+
+/* 動画一覧を右メニューのスペースに合わせて調整 */
+#videoContainer {
+  margin-right: 260px; /* ← メニューの幅分だけ余白を作る */
 }
