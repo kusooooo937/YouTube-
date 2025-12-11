@@ -1,78 +1,42 @@
-body {
-    margin: 0;
-    font-family: sans-serif;
-    background: var(--bg);
-    color: var(--fg);
-}
+/* ▼ 動画再生ページ（watch.html）レイアウト強化版 ▼ */
 
-:root {
-    --bg: #f9f9f9;
-    --fg: #111;
-    --card: #fff;
-}
-
-.dark {
-    --bg: #111;
-    --fg: #fff;
-    --card: #222;
-}
-
-/* ヘッダー */
-header {
+.watch-wrapper {
     display: flex;
-    align-items: center;
-    padding: 10px;
+    padding: 20px;
+    gap: 20px;
+}
+
+/* メイン動画を超巨大化する */
+.main-video {
+    flex: 2.5;
     background: var(--card);
-    border-bottom: 1px solid #444;
+    padding: 10px;
+    border-radius: 10px;
 }
-header .logo {
-    font-size: 20px;
-    font-weight: bold;
-    margin-left: 10px;
+
+.main-video iframe {
+    width: 100%;
+    height: 70vh;  /* ← 画面の7割の高さで巨大化 */
+    border-radius: 10px;
 }
-header input {
+
+/* 関連動画リスト（右側） */
+.related-box {
     flex: 1;
-    margin-left: 15px;
-    padding: 8px;
-}
-
-/* サイドバー */
-#sidebar {
-    position: fixed;
-    top: 50px;
-    left: 0;
-    width: 180px;
-    height: 100%;
     background: var(--card);
-    border-right: 1px solid #444;
-    padding-top: 20px;
-}
-.menu-item {
     padding: 10px;
-    border-bottom: 1px solid #333;
+    border-radius: 10px;
+    height: fit-content;
 }
 
-/* 動画グリッド */
-.video-grid {
-    margin-left: 190px;
-    padding: 15px;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 15px;
+.related-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+    cursor: pointer;
 }
-.video {
-    background: var(--card);
+
+.related-item img {
+    width: 140px;
     border-radius: 8px;
-    overflow: hidden;
-}
-.video img { width: 100%; }
-
-/* 動画詳細 */
-.watch-title {
-    padding: 10px;
-    font-size: 18px;
-}
-.watch-channel {
-    padding: 0 10px;
-    color: #888;
 }
