@@ -13,18 +13,16 @@
     <div class="logo">YourTube</div>
 </header>
 
-<div class="player-area">
-    <iframe id="player" width="100%" height="250" frameborder="0" allowfullscreen></iframe>
+<!-- プレイヤーをより大きく表示 -->
+<div class="player-wrapper">
+    <iframe id="player" frameborder="0" allowfullscreen></iframe>
 </div>
 
 <div id="videoTitle" class="watch-title"></div>
 <div id="videoChannel" class="watch-channel"></div>
 
-<h3>コメント</h3>
-<div id="comments"></div>
-
-<h3>関連動画</h3>
-<div id="related" class="video-grid"></div>
+<h3 style="padding-left:10px;">関連動画</h3>
+<div id="related" class="video-grid narrow"></div>
 
 <script src="watch.js"></script>
 </body>
