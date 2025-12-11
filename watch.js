@@ -13,20 +13,7 @@ fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&k
         videoChannel.textContent = v.channelTitle;
     });
 
-// コメント取得
-fetch(`https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&videoId=${videoId}&key=${API_KEY}`)
-    .then(r => r.json())
-    .then(d => {
-        d.items.forEach(c => {
-            const t = c.snippet.topLevelComment.snippet;
-            comments.insertAdjacentHTML("beforeend", `
-                <div style="padding:10px;border-bottom:1px solid #444;">
-                    <div><b>${t.authorDisplayName}</b></div>
-                    <div>${t.textOriginal}</div>
-                </div>
-            `);
-        });
-    });
+
 
 // 関連動画
 fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&relatedToVideoId=${videoId}&type=video&maxResults=15&key=${API_KEY}`)
