@@ -1,4 +1,4 @@
-const API_KEY = "YOUR_API_KEY";
+const API_KEY = "AIzaSyBGFcZMm0b_H258F-CB7GkP-ycSg5ZsZOE";
 const videoId = new URLSearchParams(location.search).get("id");
 
 // ---- 動画埋め込み ----
