@@ -1,34 +1,78 @@
 body {
-    font-family: Arial;
-    padding: 20px;
-    background: #f7f7f7;
+    margin: 0;
+    font-family: sans-serif;
+    background: var(--bg);
+    color: var(--fg);
 }
 
-#results {
+:root {
+    --bg: #f9f9f9;
+    --fg: #111;
+    --card: #fff;
+}
+
+.dark {
+    --bg: #111;
+    --fg: #fff;
+    --card: #222;
+}
+
+/* ヘッダー */
+header {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background: var(--card);
+    border-bottom: 1px solid #444;
+}
+header .logo {
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+header input {
+    flex: 1;
+    margin-left: 15px;
+    padding: 8px;
+}
+
+/* サイドバー */
+#sidebar {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    width: 180px;
+    height: 100%;
+    background: var(--card);
+    border-right: 1px solid #444;
+    padding-top: 20px;
+}
+.menu-item {
+    padding: 10px;
+    border-bottom: 1px solid #333;
+}
+
+/* 動画グリッド */
+.video-grid {
+    margin-left: 190px;
+    padding: 15px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 15px;
-    margin-top: 20px;
 }
-
 .video {
-    background: white;
-    padding: 10px;
+    background: var(--card);
     border-radius: 8px;
-    box-shadow: 0 0 5px rgba(0,0,0,0.1);
-    cursor: pointer;
+    overflow: hidden;
 }
+.video img { width: 100%; }
 
-.video img {
-    width: 100%;
-    border-radius: 6px;
+/* 動画詳細 */
+.watch-title {
+    padding: 10px;
+    font-size: 18px;
 }
-
-iframe {
-    margin-top: 25px;
-    width: 100%;
-    max-width: 800px;
-    height: 450px;
-    border: none;
-    border-radius: 10px;
+.watch-channel {
+    padding: 0 10px;
+    color: #888;
 }
