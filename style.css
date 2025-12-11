@@ -50,6 +50,24 @@ header input {
 .menu-item {
     padding: 10px;
     border-bottom: 1px solid #333;
+    .video-grid {
+    margin-left: 210px;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+}
+
+.video-card {
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.video-card img {
+    width: 100%;
+    border-radius: 10px;
+}
 }
 
 /* プレイヤー部分をより大きく見やすく */
