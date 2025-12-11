@@ -4,15 +4,24 @@ const videoId = new URLSearchParams(location.search).get("id");
 document.getElementById("player").src =
     `https://www.youtube.com/embed/${videoId}`;
 
-// 詳細取得
+// 動画詳細
 fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${API_KEY}`)
     .then(r => r.json())
     .then(d => {
         const v = d.items[0].snippet;
-        videoTitle.textContent = v.title;
-        videoChannel.textContent = v.channelTitle;
-    });
+        const channelId = d.items[0].snippet.channelId;     // ←追加
+        const channelName = v.channelTitle;
 
+        // タイトル
+        videoTitle.textContent = v.title;
+
+        // ⭐チャンネル名をリンクに変更（チャンネルページへ飛べる）
+        videoChannel.innerHTML = `
+            <a href="channel.html?id=${channelId}" 
+               style="color: var(--fg); text-decoration:none; font-weight:bold;">
+               ${channelName}
+            </a>`;
+    });
 
 
 // 関連動画
