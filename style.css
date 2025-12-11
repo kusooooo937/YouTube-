@@ -52,27 +52,24 @@ header input {
     border-bottom: 1px solid #333;
 }
 
-/* 動画グリッド */
-.video-grid {
-    margin-left: 190px;
-    padding: 15px;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 15px;
+/* プレイヤー部分をより大きく見やすく */
+.player-wrapper {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-top: 56.25%; /* 16:9 */
+    position: relative;
 }
-.video {
-    background: var(--card);
-    border-radius: 8px;
-    overflow: hidden;
+.player-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
-.video img { width: 100%; }
 
-/* 動画詳細 */
-.watch-title {
+/* 関連動画用レイアウト（左余白を小さくする） */
+.video-grid.narrow {
+    margin-left: 0;
     padding: 10px;
-    font-size: 18px;
-}
-.watch-channel {
-    padding: 0 10px;
-    color: #888;
 }
