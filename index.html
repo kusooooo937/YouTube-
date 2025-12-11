@@ -8,6 +8,7 @@
 </head>
 <body>
 
+<!-- 上固定ヘッダー -->
 <header>
     <div id="menuBtn">☰</div>
     <div class="logo">YourTube</div>
@@ -15,15 +16,15 @@
     <button id="searchBtn">🔍</button>
 </header>
 
-<!-- 右固定メニュー（常に表示） -->
-<aside id="sidebar">
-    <div class="menu-item">ホーム</div>
-    <div class="menu-item">ショート</div>
-    <div class="menu-item">登録チャンネル（擬似）</div>
-    <hr>
+<!-- 上固定・横並びメニュー（YouTube風） -->
+<nav id="topMenu">
+    <div class="menu-item" id="goHome">ホーム</div>
+    <div class="menu-item" id="goShorts">ショート</div>
+    <div class="menu-item" id="goSubs">登録チャンネル（擬似）</div>
     <div class="menu-item" id="darkModeBtn">🌙 ダークモード</div>
-</aside>
+</nav>
 
+<!-- メインコンテンツ -->
 <div id="content">
     <div id="videoContainer" class="video-grid"></div>
 </div>
