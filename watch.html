@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YourTube - Watch</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <div onclick="history.back()" style="cursor:pointer;">←</div>
+    <div class="logo">YourTube</div>
+</header>
+
+<div class="player-area">
+    <iframe id="player" width="100%" height="250" frameborder="0" allowfullscreen></iframe>
+</div>
+
+<div id="videoTitle" class="watch-title"></div>
+<div id="videoChannel" class="watch-channel"></div>
+
+<h3>コメント</h3>
+<div id="comments"></div>
+
+<h3>関連動画</h3>
+<div id="related" class="video-grid"></div>
+
+<script src="watch.js"></script>
+</body>
+</html>
