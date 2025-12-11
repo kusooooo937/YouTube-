@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YourTube - Channel</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .channel-header {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 15px;
+            background: var(--card);
+            border-radius: 10px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        .channel-header img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+        }
+        .channel-info {
+            flex: 1;
+        }
+        .channel-info h2 {
+            margin: 0;
+            font-size: 22px;
+        }
+        .channel-info .stats {
+            color: #888;
+            margin: 5px 0;
+        }
+        .channel-info .desc {
+            color: var(--fg);
+            margin-top: 10px;
+            white-space: pre-line;
+        }
+
+        /* 動画一覧（既存CSS利用） */
+        #channelVideos {
+            max-width: 1000px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div onclick="history.back()" style="cursor:pointer;">←</div>
+    <div class="logo">YourTube</div>
+</header>
+
+<div id="channelHeader" class="channel-header"></div>
+
+<h3 style="max-width:1000px; margin: 10px auto;">動画</h3>
+<div id="channelVideos" class="video-grid"></div>
+
+<script src="channel.js"></script>
+</body>
+</html>
