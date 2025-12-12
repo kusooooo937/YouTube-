@@ -1,12 +1,15 @@
 const API_KEY = "AIzaSyBGFcZMm0b_H258F-CB7GkP-ycSg5ZsZOE";
 
 let nextPageToken = "";
-let mode = "home";
+let mode = "home"; // "home" か "search"
+let currentQuery = ""; // 検索ワード保持
 
-// 初回ロード
-loadVideos();
+// 初回ロード（人気動画）
+loadVideos(true);
 
-// 動画ロード
+// -------------------------
+// 人気動画ロード（ホーム）
+// -------------------------
 function loadVideos(reset = false) {
     if (reset) {
         videoContainer.innerHTML = "";
@@ -15,7 +18,7 @@ function loadVideos(reset = false) {
 
     let url =
         "https://www.googleapis.com/youtube/v3/videos" +
-        `?part=snippet&chart=mostPopular&regionCode=JP&maxResults=20` +
+        `?part=snippet&chart=mostPopular&regionCode=JP&maxResults=50` + // ← 50件
         (nextPageToken ? `&pageToken=${nextPageToken}` : "") +
         `&key=${API_KEY}`;
 
@@ -27,7 +30,9 @@ function loadVideos(reset = false) {
         });
 }
 
+// -------------------------
 // 動画描画
+// -------------------------
 function renderVideos(list) {
     list.forEach(v => {
         const html = `
@@ -40,34 +45,61 @@ function renderVideos(list) {
     });
 }
 
+// -------------------------
 // 検索
+// -------------------------
 searchBtn.onclick = () => doSearch();
 searchInput.addEventListener("keydown", e => {
     if (e.key === "Enter") doSearch();
 });
-function doSearch() {
-    const q = searchInput.value;
+
+function doSearch(reset = true) {
+    const q = reset ? searchInput.value : currentQuery;
+
     mode = "search";
-    videoContainer.innerHTML = "";
-    nextPageToken = "";
+    currentQuery = q;
+
+    if (reset) {
+        videoContainer.innerHTML = "";
+        nextPageToken = "";
+    }
 
     const url =
         "https://www.googleapis.com/youtube/v3/search" +
-        `?part=snippet&type=video&q=${encodeURIComponent(q)}&maxResults=20&key=${API_KEY}`;
+        `?part=snippet&type=video&q=${encodeURIComponent(q)}&maxResults=50` + // ← 50件
+        (nextPageToken ? `&pageToken=${nextPageToken}` : "") +
+        `&key=${API_KEY}`;
 
     fetch(url)
         .then(r => r.json())
-        .then(data => renderVideos(data.items.map(i => ({ id: i.id.videoId, snippet: i.snippet }))));
+        .then(data => {
+            nextPageToken = data.nextPageToken || "";
+
+            // search API は id: { videoId: ... } なので整形
+            const converted = data.items.map(i => ({
+                id: i.id.videoId,
+                snippet: i.snippet
+            }));
+
+            renderVideos(converted);
+        });
 }
 
-// 無限スクロール
+// -------------------------
+// 無限スクロール（ホーム & 検索共通）
+// -------------------------
 window.addEventListener("scroll", () => {
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 800) {
-        if (nextPageToken) loadVideos();
+        if (!nextPageToken) return;
+
+        if (mode === "home") loadVideos(false);
+        if (mode === "search") doSearch(false);
     }
 });
 
+// -------------------------
 // ダークモード
+// -------------------------
 document.getElementById("darkModeBtn").onclick = () => {
     document.body.classList.toggle("dark");
 };
