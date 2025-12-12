@@ -24,17 +24,33 @@ fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&k
     });
 
 
-// 関連動画
-fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&relatedToVideoId=${videoId}&type=video&maxResults=15&key=${API_KEY}`)
+// 関連動画（安定版）
+fetch(`
+https://www.googleapis.com/youtube/v3/search
+    ?part=snippet
+    &relatedToVideoId=${videoId}
+    &type=video
+    &maxResults=20
+    &regionCode=JP
+    &key=${API_KEY}
+`.replace(/\s+/g, ''))
     .then(r => r.json())
     .then(d => {
+        if (!d.items || d.items.length === 0) {
+            related.innerHTML = "<div style='padding:10px;'>関連動画が取得できませんでした。</div>";
+            return;
+        }
+
         d.items.forEach(v => {
             const html = `
-            <a class="video" href="watch.html?id=${v.id.videoId}">
-                <img src="${v.snippet.thumbnails.medium.url}">
-                <div class="title">${v.snippet.title}</div>
-                <div class="channel">${v.snippet.channelTitle}</div>
-            </a>`;
+                <a class="video" href="watch.html?id=${v.id.videoId}">
+                    <img src="${v.snippet.thumbnails.medium.url}">
+                    <div class="title">${v.snippet.title}</div>
+                    <div class="channel">${v.snippet.channelTitle}</div>
+                </a>`;
             related.insertAdjacentHTML("beforeend", html);
         });
+    })
+    .catch(err => {
+        related.innerHTML = "エラー: " + err;
     });
